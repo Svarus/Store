@@ -75,7 +75,6 @@ class CSVHandler {
                         currentValue.append('"');
                     }
                 } else if (ch == separators) {
-                    //
                     if (currentValue.substring(0, 1).equals(String.valueOf(separatorAdditional)))
                         result.add(currentValue.substring(1, currentValue.length()));
                     else

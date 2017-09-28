@@ -8,4 +8,8 @@ public interface Product {
     int getSoldQuantity();
     int getRebuyQuantity();
     int getId();
+    void addIncome(double value);
+    double getVolume();
+    void reBuy(int value);
+    String getFullName();
 }

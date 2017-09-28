@@ -12,6 +12,8 @@ public class SoftDrink implements Product {
     //for Reports
     private int soldQuantity;
     private int rebuyQuantity;
+    private double income;
+    private double outcome;
 
     public SoftDrink(String name, double price, String category,
                         double volume, String composition, int quantity) {
@@ -57,7 +59,29 @@ public class SoftDrink implements Product {
     }
 
     @Override
-    public void changeQuantity(int value) {
+    public void addIncome(double value) {
+        income += value;
+    }
 
+    @Override
+    public double getVolume() {
+        return volume;
+    }
+
+    @Override
+    public void reBuy(int value) {
+        rebuyQuantity += value;
+        quantity += value;
+    }
+
+    @Override
+    public void changeQuantity(int value) {
+        quantity -= value;
+        soldQuantity += value;
+    }
+
+    @Override
+    public String getFullName(){
+        return String.format("%s (%.2f)", name, volume);
     }
 }
