@@ -61,7 +61,7 @@ public class Manager {
                 double percent = 0.1;	//standard mark-up 10%
                 boolean discount = false;
                 int dayOfWeek = date.get(Calendar.DAY_OF_WEEK);
-                if (dayOfWeek == Calendar.WEDNESDAY || dayOfWeek == Calendar.SUNDAY) {
+                if (dayOfWeek == Calendar.SATURDAY || dayOfWeek == Calendar.SUNDAY) {
                     percent = 0.15;	//weekend mark-up 15%
                 }
                 //int hour = date.get(Calendar.HOUR_OF_DAY);
@@ -102,7 +102,7 @@ public class Manager {
     }
 
     public void saveReport(String fileName) {
-        ArrayList<String> messages = new ArrayList<>();
+        ArrayList<String> messages;
 
         messages = stock.getReport();
 
@@ -116,6 +116,5 @@ public class Manager {
         System.out.format("Product %s left: %d. Making order for additional %d items\n", product.getName(), product.getQuantity(), i);
         stock.addOutcome(product.getPrice() * i);
         product.reBuy(i);
-        //product.setQuantity(product.getQuantity() + i);
     }
 }

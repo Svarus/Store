@@ -27,7 +27,7 @@ public class TimeGenerator {
         }
     }
 
-    public ArrayList<Calendar> generateVisitors(Calendar calendar, int startHour, int endHour, int maxCustomersCount) {
+    public ArrayList<Calendar> generateCustomers(Calendar calendar, int startHour, int endHour, int maxCustomersCount) {
         fillDigits(startHour, endHour, hours);  //every hour
 
         Calendar calendarAdded;
