@@ -9,12 +9,13 @@ import java.util.List;
 
 class CSVHandler {
     private static final char DEFAULT_SEPARATOR = ',';
+    private static final char DEFAULT_SEPARATOR_ADDITION = ' ';
     private static final char DEFAULT_QUOTE = '"';
 
     static Product convertToProduct(String line){
         Product product;
 
-        List<String> data = parseLine(line, DEFAULT_SEPARATOR, DEFAULT_QUOTE);
+        List<String> data = parseLine(line, DEFAULT_SEPARATOR, DEFAULT_SEPARATOR_ADDITION, DEFAULT_QUOTE);
         String name = data.get(0);
         double price = Double.parseDouble(data.get(1));
         String category = data.get(2);
@@ -31,7 +32,7 @@ class CSVHandler {
         return product;
     }
 
-    private static List<String> parseLine(String line, char separators, char customQuote) {
+    private static List<String> parseLine(String line, char separators, char separatorAdditional, char customQuote) {
         ArrayList<String> result = new ArrayList<>();
 
         if (line == null && line.isEmpty()) {
@@ -51,6 +52,7 @@ class CSVHandler {
                 if (ch == customQuote) {
                     inQuotes = false;
                     doubleQuotesInColumn = false;
+                    currentValue.append(DEFAULT_QUOTE);
                 } else {
                     if (ch == '\"') {
                         if (!doubleQuotesInColumn) {
@@ -65,7 +67,7 @@ class CSVHandler {
                 if (ch == customQuote) {
                     inQuotes = true;
 
-                    if (chars[0] != '"' && customQuote == '\"') {
+                    if (chars[0] == '"' && customQuote == '\"') {
                         currentValue.append('"');
                     }
 
@@ -73,7 +75,11 @@ class CSVHandler {
                         currentValue.append('"');
                     }
                 } else if (ch == separators) {
-                    result.add(currentValue.toString());
+                    //
+                    if (currentValue.substring(0, 1).equals(String.valueOf(separatorAdditional)))
+                        result.add(currentValue.substring(1, currentValue.length()));
+                    else
+                        result.add(currentValue.toString());
 
                     currentValue = new StringBuffer();
                     startCollectChar = false;
