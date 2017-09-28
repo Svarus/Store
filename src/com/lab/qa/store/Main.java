@@ -5,7 +5,8 @@ import com.lab.qa.store.models.Manager;
 public class Main {
 
     public static void main(String[] args) {
-        Manager manager = new Manager();
+        String dataBaseFileName = "db.csv";
+        Manager manager = new Manager(dataBaseFileName);
 
         System.out.println("End of program");
     }

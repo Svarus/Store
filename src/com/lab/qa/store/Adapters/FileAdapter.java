@@ -23,7 +23,7 @@ public class FileAdapter {
         String line;
         try {
             while ((line = br.readLine()) != null) {
-                System.out.println(line);
+                //System.out.println(line); //debug purpose
                 Product product = CSVHandler.convertToProduct(line);
                 stock.addProduct(product);
             }
