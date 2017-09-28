@@ -33,9 +33,10 @@ public class Stock {
 
     void showProducts() {
         for (Product product : products.values()) {
-            System.out.format("Product %s sold: %d\n", product.getFullName(), product.getSoldQuantity());
-            System.out.format("Product %s left: %d\n", product.getFullName(), product.getQuantity());
-            System.out.format("Product %s rebuyed: %d\n", product.getFullName(), product.getRebuyQuantity());
+            System.out.format("Product %s\n", product.getFullName());
+            System.out.format("\t\tsold: %d\n", product.getSoldQuantity());
+            System.out.format("\t\tremains: %d\n", product.getQuantity());
+            System.out.format("\t\tordered: %d\n", product.getRebuyQuantity());
         }
     }
 
@@ -43,8 +44,11 @@ public class Stock {
         ArrayList<String> report = new ArrayList<>();
 
         for (Product product : products.values()){
-            report.add(String.format("Product %s sold: %d", product.getFullName(), product.getSoldQuantity()));
-            report.add(String.format("Product %s rebuyed: %d", product.getFullName(), product.getRebuyQuantity()));
+            //report.add(String.format("Product %s sold: %d", product.getFullName(), product.getSoldQuantity()));
+            //report.add(String.format("Product %s ordered: %d", product.getFullName(), product.getRebuyQuantity()));
+            report.add(String.format("%s", product.getFullName()));
+            report.add(String.format("\tsold: %d", product.getSoldQuantity()));
+            report.add(String.format("\tordered: %d", product.getRebuyQuantity()));
         }
 
         return report;

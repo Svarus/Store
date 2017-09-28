@@ -17,7 +17,7 @@ public class Main {
         final int WORK_HOURS_END = 21;
         final int MAX_CUSTOMERS_PER_HOUR = 10;
         final int MAX_ORDERS_PER_DAY = 10;
-        final int DAYS = 5;
+        final int DAYS = 30;
 
         Manager manager = new Manager(DATA_BASE_FILE_NAME, WORK_HOURS_START, WORK_HOURS_END);
         TimeGenerator timeGenerator = new TimeGenerator();
@@ -26,6 +26,7 @@ public class Main {
         int id;
         int quantity;
 
+        System.out.format("<<Store is initialized>>\nWe are open from tomorrow for %d days\n\n", DAYS);
         for (int day = 0; day < DAYS; day++){
             calendar.add(Calendar.DATE, 1);
             ArrayList<Calendar> customersPerDay = timeGenerator.generateCustomers(calendar,WORK_HOURS_START, WORK_HOURS_END, MAX_CUSTOMERS_PER_HOUR);
@@ -38,6 +39,7 @@ public class Main {
             manager.actionEndOfDay();
         }
         manager.saveReport(REPORT_FILE_NAME);
+        manager.updateDataBase(DATA_BASE_FILE_NAME);
 
         System.out.println("<<Store is closed now>>");
     }

@@ -90,15 +90,15 @@ public class Manager {
     }
 
     public void actionEndOfDay() {
-        System.out.println("\nEnd of Day Report");
+        //System.out.println("\nEnd of Day Report");
 
-        stock.showProducts();
+        //stock.showProducts();
         stock.fillProducts(this);
-        stock.showProducts();
+        //stock.showProducts();
 
-        System.out.format("\nProfit: %.2f\n", stock.getProfit());
+        /*System.out.format("\nProfit: %.2f\n", stock.getProfit());
         System.out.format("Total outcome: %.2f\n", stock.getOutcome());
-        System.out.format("Total income: %.2f\n\n", stock.getIncome());
+        System.out.format("Total income: %.2f\n\n", stock.getIncome());*/
     }
 
     public void saveReport(String fileName) {
@@ -106,15 +106,26 @@ public class Manager {
 
         messages = stock.getReport();
 
-        messages.add(String.format("Profit: %.2f", stock.getProfit()));
+        messages.add(String.format("\nProfit: %.2f", stock.getProfit()));
         messages.add(String.format("Total outcome: %.2f", stock.getOutcome()));
-        messages.add(String.format("Total income: %.2f", stock.getIncome()));
+        //messages.add(String.format("Total income: %.2f", stock.getIncome()));
         FileAdapter.stringWriter(messages, fileName);
     }
 
     void makeOrder(Product product, int i) {
-        System.out.format("Product %s left: %d. Making order for additional %d items\n", product.getName(), product.getQuantity(), i);
+        //System.out.format("Product %s left: %d. Making order for additional %d items\n", product.getName(), product.getQuantity(), i);
         stock.addOutcome(product.getPrice() * i);
         product.reBuy(i);
+    }
+
+    public void updateDataBase(String fileName) {
+        ArrayList<String> messages = new ArrayList<>();
+
+        HashMap<Integer, Product> products = stock.getAllProducts();
+        for (Product product : products.values()){
+            String str = product.getCsvString();
+            messages.add(str);
+        }
+        FileAdapter.stringWriter(messages, fileName);
     }
 }

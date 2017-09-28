@@ -1,5 +1,7 @@
 package com.lab.qa.store.models;
 
+import com.lab.qa.store.Adapters.CSVHandler;
+
 public class SoftDrink implements Product {
     private int id;
     private String name;
@@ -83,5 +85,21 @@ public class SoftDrink implements Product {
     @Override
     public String getFullName(){
         return String.format("%s (%.2f)", name, volume);
+    }
+
+    @Override
+    public String getCsvString() {
+        String str = CSVHandler.convertToCsv(this);
+        return str;
+    }
+
+    @Override
+    public String getCategory() {
+        return category;
+    }
+
+    @Override
+    public String getAdditionalDescription() {
+        return composition;
     }
 }

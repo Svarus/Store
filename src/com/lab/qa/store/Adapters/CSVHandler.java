@@ -7,7 +7,7 @@ import com.lab.qa.store.models.SoftDrink;
 import java.util.ArrayList;
 import java.util.List;
 
-class CSVHandler {
+public class CSVHandler {
     private static final char DEFAULT_SEPARATOR = ',';
     private static final char DEFAULT_SEPARATOR_ADDITION = ' ';
     private static final char DEFAULT_QUOTE = '"';
@@ -91,5 +91,15 @@ class CSVHandler {
         }
         result.add(currentValue.toString());
         return result;
+    }
+
+    public static String convertToCsv(Product product){
+        String separator = "" + DEFAULT_SEPARATOR + DEFAULT_SEPARATOR_ADDITION;
+        String line = product.getName() +  separator + product.getPrice() + separator +
+                product.getCategory() + separator + product.getVolume() + separator +
+                product.getAdditionalDescription() + separator +
+                product.getQuantity();
+
+        return line;
     }
 }

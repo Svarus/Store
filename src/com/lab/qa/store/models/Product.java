@@ -12,4 +12,7 @@ public interface Product {
     double getVolume();
     void reBuy(int value);
     String getFullName();
+    String getCsvString();
+    String getCategory();
+    String getAdditionalDescription();
 }
