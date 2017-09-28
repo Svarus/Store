@@ -13,20 +13,25 @@ public class CSVHandler {
     private static final char DEFAULT_QUOTE = '"';
 
     static Product convertToProduct(String line){
-        Product product;
+        Product product = null;
 
-        List<String> data = parseLine(line, DEFAULT_SEPARATOR, DEFAULT_SEPARATOR_ADDITION, DEFAULT_QUOTE);
-        String name = data.get(0);
-        double price = Double.parseDouble(data.get(1));
-        String category = data.get(2);
-        double volume = Double.parseDouble(data.get(3));
-        String strength = data.get(4);
-        int quantity = Integer.parseInt(data.get(5).replaceAll("\\s+",""));
+        try {
+            List<String> data = parseLine(line, DEFAULT_SEPARATOR, DEFAULT_SEPARATOR_ADDITION, DEFAULT_QUOTE);
+            String name = data.get(0);
+            double price = Double.parseDouble(data.get(1));
+            String category = data.get(2);
+            double volume = Double.parseDouble(data.get(3));
+            String additionalDescription = data.get(4);
+            int quantity = Integer.parseInt(data.get(5).replaceAll("\\s+", ""));
 
-        if (strength.contains("%")) {
-            product = new AlcoholDrink(name, price, category, volume, strength, quantity);
-        } else {
-            product = new SoftDrink(name, price, category, volume, strength, quantity);
+            if (additionalDescription.contains("%")) {
+                product = new AlcoholDrink(name, price, category, volume, additionalDescription, quantity);
+            } else {
+                product = new SoftDrink(name, price, category, volume, additionalDescription, quantity);
+            }
+        } catch (Exception exc){
+            System.out.println("Can't parse CSV file correctly, please check it and try again. Problem is in line:\n" + line);
+            System.exit(1);
         }
 
         return product;
@@ -34,10 +39,6 @@ public class CSVHandler {
 
     private static List<String> parseLine(String line, char separators, char separatorAdditional, char customQuote) {
         ArrayList<String> result = new ArrayList<>();
-
-        if (line == null && line.isEmpty()) {
-            return result;
-        }
 
         StringBuffer currentValue = new StringBuffer();
         boolean inQuotes = false;
@@ -90,16 +91,16 @@ public class CSVHandler {
             }
         }
         result.add(currentValue.toString());
+
         return result;
     }
 
     public static String convertToCsv(Product product){
         String separator = "" + DEFAULT_SEPARATOR + DEFAULT_SEPARATOR_ADDITION;
-        String line = product.getName() +  separator + product.getPrice() + separator +
+
+        return  product.getName() +  separator + product.getPrice() + separator +
                 product.getCategory() + separator + product.getVolume() + separator +
                 product.getAdditionalDescription() + separator +
                 product.getQuantity();
-
-        return line;
     }
 }
