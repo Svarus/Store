@@ -14,7 +14,7 @@ public class FileAdapter {
         try {
             fis = new FileInputStream(file);
         } catch (FileNotFoundException e) {
-            System.out.println("Can't find file " + fileName);
+            System.out.println("Can't find file " + fileName + ". Please check value for final String DATA_BASE_FILE_NAME if it's possible");
             System.out.println("Program is stopped for now.");
             System.exit(1);
         }
