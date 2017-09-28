@@ -19,26 +19,12 @@ public class Manager {
         this.loadProducts(dataBaseFileName);
     }
 
-    public void setDataBase (Stock stock) {
-        this.stock = stock;
-    }
-
-    public void addProduct(Product product) {
-        stock.addProduct(product);
-    }
-
-    public HashMap<Integer, Product> getProducts(){
-        return stock.getAllProducts();
-    }
-
     private void createStock() {
         this.stock = new Stock();
     }
 
     private void loadProducts(String fileName) {
-        if (!FileAdapter.loadProducts(stock, fileName)) {
-            System.out.println("Can't open database " + fileName);
-        }
+        FileAdapter.loadProducts(stock, fileName);
     }
 
     public void actionSellProduct(int id, int quantity, Calendar date) {
@@ -90,13 +76,12 @@ public class Manager {
     }
 
     public void actionEndOfDay() {
-        //System.out.println("\nEnd of Day Report");
+        //System.out.println("\nEnd of Day: Report");
 
-        //stock.showProducts();
         stock.fillProducts(this);
-        //stock.showProducts();
-
-        /*System.out.format("\nProfit: %.2f\n", stock.getProfit());
+        /*//debug purpose
+        stock.showProducts();
+        System.out.format("\nProfit: %.2f\n", stock.getProfit());
         System.out.format("Total outcome: %.2f\n", stock.getOutcome());
         System.out.format("Total income: %.2f\n\n", stock.getIncome());*/
     }

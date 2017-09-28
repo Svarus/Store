@@ -16,8 +16,13 @@ public class Main {
         final int WORK_HOURS_START = 8;
         final int WORK_HOURS_END = 21;
         final int MAX_CUSTOMERS_PER_HOUR = 10;
-        final int MAX_ORDERS_PER_DAY = 10;
+        final int MAX_ORDERS_PER_CUSTOMER = 10;
         final int DAYS = 30;
+
+        if (DATA_BASE_FILE_NAME.equals(REPORT_FILE_NAME)){
+            System.out.println("Wrong file name for database or report file\nPlease try again");
+            System.exit(1);
+        }
 
         Manager manager = new Manager(DATA_BASE_FILE_NAME, WORK_HOURS_START, WORK_HOURS_END);
         TimeGenerator timeGenerator = new TimeGenerator();
@@ -33,7 +38,7 @@ public class Main {
 
             for (Calendar customerVisitTime : customersPerDay) {
                id = rnd.nextInt(Stock.numOfProducts) + 1;
-               quantity = rnd.nextInt(MAX_ORDERS_PER_DAY);
+               quantity = rnd.nextInt((MAX_ORDERS_PER_CUSTOMER < 0 ? -MAX_ORDERS_PER_CUSTOMER : MAX_ORDERS_PER_CUSTOMER) + 1);
                manager.actionSellProduct(id, quantity, customerVisitTime);
             }
             manager.actionEndOfDay();

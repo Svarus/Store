@@ -6,6 +6,9 @@ import java.util.HashMap;
 public class Stock {
     public static int numOfProducts;
 
+    private final int MIN_REQUIRED = 10;
+    private final int ITEMS_NEEDED = 150;
+
     private HashMap<Integer, Product> products = new HashMap<>();
     private double income;
     private double outcome;
@@ -31,6 +34,7 @@ public class Stock {
         profit += (price - product.getPrice()) * quantity;
     }
 
+    //debug purpose only
     void showProducts() {
         for (Product product : products.values()) {
             System.out.format("Product %s\n", product.getFullName());
@@ -44,8 +48,6 @@ public class Stock {
         ArrayList<String> report = new ArrayList<>();
 
         for (Product product : products.values()){
-            //report.add(String.format("Product %s sold: %d", product.getFullName(), product.getSoldQuantity()));
-            //report.add(String.format("Product %s ordered: %d", product.getFullName(), product.getRebuyQuantity()));
             report.add(String.format("%s", product.getFullName()));
             report.add(String.format("\tsold: %d", product.getSoldQuantity()));
             report.add(String.format("\tordered: %d", product.getRebuyQuantity()));
@@ -56,8 +58,8 @@ public class Stock {
 
     void fillProducts(Manager manager) {
         for (Product product : products.values()) {
-            if (product.getQuantity() < 10) {
-                manager.makeOrder(product, 150 - product.getQuantity());
+            if (product.getQuantity() < MIN_REQUIRED) {
+                manager.makeOrder(product, ITEMS_NEEDED - product.getQuantity());
             }
         }
     }

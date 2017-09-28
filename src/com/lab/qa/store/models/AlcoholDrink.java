@@ -31,6 +31,33 @@ public class AlcoholDrink implements Product {
     }
 
     @Override
+    public void changeQuantity(int value) {
+        quantity -= value;
+        soldQuantity += value;
+    }
+
+    @Override
+    public void reBuy(int value) {
+        rebuyQuantity += value;
+        quantity += value;
+    }
+
+    @Override
+    public String getCsvString() {
+        return CSVHandler.convertToCsv(this);
+    }
+
+    @Override
+    public void addIncome(double value) {
+        income += value;
+    }
+
+    @Override
+    public String getFullName(){
+        return String.format("%s (%.2f)", name, volume);
+    }
+
+    @Override
     public String getName() {
         return name;
     }
@@ -61,36 +88,8 @@ public class AlcoholDrink implements Product {
     }
 
     @Override
-    public void addIncome(double value) {
-        income += value;
-    }
-
-    @Override
     public double getVolume() {
         return volume;
-    }
-
-    @Override
-    public void reBuy(int value) {
-        rebuyQuantity += value;
-        quantity += value;
-    }
-
-    @Override
-    public void changeQuantity(int value) {
-        quantity -= value;
-        soldQuantity += value;
-    }
-
-    @Override
-    public String getFullName(){
-        return String.format("%s (%.2f)", name, volume);
-    }
-
-    @Override
-    public String getCsvString() {
-        String str = CSVHandler.convertToCsv(this);
-        return str;
     }
 
     @Override

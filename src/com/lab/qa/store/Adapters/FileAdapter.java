@@ -4,36 +4,33 @@ import com.lab.qa.store.models.Product;
 import com.lab.qa.store.models.Stock;
 
 import java.io.*;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 public class FileAdapter {
-    public static boolean loadProducts(Stock stock, String fileName) {
-        boolean result;
+    public static void loadProducts(Stock stock, String fileName) {
 
-        File fin = new File(fileName);
-        FileInputStream fis;
+        File file = new File(fileName);
+        FileInputStream fis = null;
         try {
-            fis = new FileInputStream(fin);
+            fis = new FileInputStream(file);
         } catch (FileNotFoundException e) {
-            result = false;
-            e.printStackTrace();
-            return result;
+            System.out.println("Can't find file " + fileName);
+            System.out.println("Program is stopped for now.");
+            System.exit(1);
         }
         BufferedReader br = new BufferedReader(new InputStreamReader(fis));
 
         String line;
         try {
             while ((line = br.readLine()) != null) {
-                //System.out.println(line); //debug purpose
-                Product product = CSVHandler.convertToProduct(line);
-                stock.addProduct(product);
+                //skip empty lines
+                if (line.length() > 1) {
+                    Product product = CSVHandler.convertToProduct(line);
+                    stock.addProduct(product);
+                }
             }
-            result = true;
         } catch (IOException e) {
-            result = false;
             e.printStackTrace();
-            return result;
         }
 
         try {
@@ -41,13 +38,11 @@ public class FileAdapter {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        return result;
     }
 
     public static void stringWriter(ArrayList<String> data, String fileName) {
         try {
-            // Assume default encoding.
+            // Assume default encoding
             FileWriter fileWriter = new FileWriter(fileName);
             //Writer fileWriter = new OutputStreamWriter(new FileOutputStream(fileName), StandardCharsets.UTF_8);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
