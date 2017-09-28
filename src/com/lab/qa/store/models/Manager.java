@@ -98,7 +98,7 @@ public class Manager {
 
         System.out.format("\nProfit: %.2f\n", stock.getProfit());
         System.out.format("Total outcome: %.2f\n", stock.getOutcome());
-        System.out.format("Total income: %.2f\n", stock.getIncome());
+        System.out.format("Total income: %.2f\n\n", stock.getIncome());
     }
 
     public void saveReport(String fileName) {
