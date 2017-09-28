@@ -3,11 +3,11 @@ package com.lab.qa.store.Adapters;
 import java.util.*;
 
 public class TimeGenerator {
-    private ArrayList<Integer> hours = new ArrayList<Integer>();
-    private ArrayList<Integer> minutes = new ArrayList<Integer>();
-    private ArrayList<String> time = new ArrayList<String>();
+    private ArrayList<Integer> hours = new ArrayList<>();
+    private ArrayList<Integer> minutes = new ArrayList<>();
+    private ArrayList<String> time = new ArrayList<>();
 
-    private ArrayList<Calendar> calendars = new ArrayList<Calendar>();
+    private ArrayList<Calendar> calendars = new ArrayList<>();
 
     private void generateDigits(int start, int end, int count, ArrayList<Integer> array) {
         Random rnd = new Random();
@@ -37,7 +37,7 @@ public class TimeGenerator {
         calendars.clear();
 
         for (int i = 0; i < endHour - startHour; i++) {
-            customersCount = rnd.nextInt(maxCustomersCount);
+            customersCount = rnd.nextInt(maxCustomersCount - 1) + 1;
             generateDigits(0, 59, customersCount, minutes);
             Collections.sort(minutes);
 

@@ -2,10 +2,12 @@ package com.lab.qa.store;
 
 import com.lab.qa.store.Adapters.TimeGenerator;
 import com.lab.qa.store.models.Manager;
+import com.lab.qa.store.models.Stock;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Random;
 
 public class Main {
 
@@ -19,17 +21,25 @@ public class Main {
 
         Calendar calendar = Calendar.getInstance();
 
+        Random rnd = new Random();
+        int id;
+        int quantity;
+
         for (int day = 0; day < 2; day++){
             calendar.add(Calendar.DATE, day);
             ArrayList<Calendar> visitorsPerDay = timeGenerator.generateVisitors(calendar,8, 21, 10);
 
             for (Calendar vis : visitorsPerDay) {
                 //System.out.println(sdf.format(vis.getTime()));
-                manager.actionSellProduct(1, 2, vis);
+               id = rnd.nextInt(Stock.numOfProducts) + 1;
+               quantity = rnd.nextInt(10);
+               manager.actionSellProduct(id, quantity, vis);
             }
             manager.actionEndOfDay();
         }
 
+        String reportFileName = "report.txt";
+        manager.saveReport(reportFileName);
 /*
         manager.actionSellProduct(1, 2, visitorsPerDay.get(0));
         manager.actionSellProduct(2, 2, visitorsPerDay.get(9));

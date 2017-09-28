@@ -1,9 +1,10 @@
 package com.lab.qa.store.models;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Stock {
-    static int numOfProducts;
+    public static int numOfProducts;
 
     private HashMap<Integer, Product> products = new HashMap<>();
     private double income;
@@ -36,6 +37,17 @@ public class Stock {
             System.out.format("Product %s left: %d\n", product.getFullName(), product.getQuantity());
             System.out.format("Product %s rebuyed: %d\n", product.getFullName(), product.getRebuyQuantity());
         }
+    }
+
+    ArrayList<String> getReport(){
+        ArrayList<String> report = new ArrayList<>();
+
+        for (Product product : products.values()){
+            report.add(String.format("Product %s sold: %d", product.getFullName(), product.getSoldQuantity()));
+            report.add(String.format("Product %s rebuyed: %d", product.getFullName(), product.getRebuyQuantity()));
+        }
+
+        return report;
     }
 
     void fillProducts(Manager manager) {

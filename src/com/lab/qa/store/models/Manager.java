@@ -103,6 +103,9 @@ public class Manager {
 
     public void saveReport(String fileName) {
         ArrayList<String> messages = new ArrayList<>();
+
+        messages = stock.getReport();
+
         messages.add(String.format("Profit: %.2f", stock.getProfit()));
         messages.add(String.format("Total outcome: %.2f", stock.getOutcome()));
         messages.add(String.format("Total income: %.2f", stock.getIncome()));

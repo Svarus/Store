@@ -4,6 +4,7 @@ import com.lab.qa.store.models.Product;
 import com.lab.qa.store.models.Stock;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 public class FileAdapter {
@@ -48,6 +49,7 @@ public class FileAdapter {
         try {
             // Assume default encoding.
             FileWriter fileWriter = new FileWriter(fileName);
+            //Writer fileWriter = new OutputStreamWriter(new FileOutputStream(fileName), StandardCharsets.UTF_8);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
             for(String str : data) {
                 bufferedWriter.write(str);
