@@ -1,5 +1,7 @@
 package com.lab.qa.store.models;
 
+import com.lab.qa.store.Adapters.FileAdapter;
+
 import java.util.HashMap;
 
 public class Manager {
@@ -18,7 +20,7 @@ public class Manager {
         stock.addProduct(product);
     }
 
-    public HashMap<String, Product> getProducts(){
+    public HashMap<Integer, Product> getProducts(){
         return stock.getAllProducts();
     }
 
@@ -26,10 +28,14 @@ public class Manager {
         this.stock = new Stock();
     }
 
-    public void loadProducts() {
-        Product product1 = new AlcoholDrink("White", 10, "red wines", 0.95, "5%", 5);
+    private void loadProducts() {
+        /*Product product1 = new AlcoholDrink("White", 10, "red wines", 0.95, "5%", 5);
         Product product2 = new SoftDrink("Mineral water Good", 1, "mineral waters", 0.3, "water, minerals", 14);
         stock.addProduct(product1);
-        stock.addProduct(product2);
+        stock.addProduct(product2);*/
+        String fileName = "db.csv";
+        if (!FileAdapter.loadProducts(stock, fileName)) {
+            System.out.println("Can't open database " + fileName);
+        }
     }
 }

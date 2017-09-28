@@ -7,4 +7,5 @@ public interface Product {
     int getQuantity();
     int getSoldQuantity();
     int getRebuyQuantity();
+    int getId();
 }

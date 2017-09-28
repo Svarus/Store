@@ -1,6 +1,7 @@
 package com.lab.qa.store.models;
 
 public class AlcoholDrink implements Product {
+    private int id;
     private String name;
     private double price;
     private String category;
@@ -12,8 +13,11 @@ public class AlcoholDrink implements Product {
     private int soldQuantity;
     private int rebuyQuantity;
 
-    AlcoholDrink(String name, double price, String category,
+    public AlcoholDrink(String name, double price, String category,
                    double volume, String strength, int quantity) {
+        Stock.numOfProducts++;
+        this.id = Stock.numOfProducts;
+
         this.name = name;
         this.price = price;
         this.category = category;
@@ -45,6 +49,11 @@ public class AlcoholDrink implements Product {
     @Override
     public int getRebuyQuantity() {
         return rebuyQuantity;
+    }
+
+    @Override
+    public int getId() {
+        return id;
     }
 
     @Override

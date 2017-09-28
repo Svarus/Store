@@ -3,21 +3,22 @@ package com.lab.qa.store.models;
 import java.util.HashMap;
 
 public class Stock {
-    private HashMap<String, Product> products = new HashMap<>();
+    static int numOfProducts;
+    private HashMap<Integer, Product> products = new HashMap<>();
     private double income;
     private double outcome;
     private double profit;
 
-    void addProduct(Product product) {
-        products.put(product.getName(), product);
+    public void addProduct(Product product) {
+        products.put(product.getId(), product);
     }
 
-    HashMap<String, Product> getAllProducts(){
+    HashMap<Integer, Product> getAllProducts(){
         return products;
     }
 
-    public Product getProduct(String name) {
-        return products.get(name);
+    public Product getProduct(Integer id) {
+        return products.get(id);
     }
 
     public double getIncome() {

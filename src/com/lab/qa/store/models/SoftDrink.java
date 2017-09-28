@@ -1,6 +1,7 @@
 package com.lab.qa.store.models;
 
 public class SoftDrink implements Product {
+    private int id;
     private String name;
     private double price;
     private String category;
@@ -12,8 +13,11 @@ public class SoftDrink implements Product {
     private int soldQuantity;
     private int rebuyQuantity;
 
-    SoftDrink(String name, double price, String category,
+    public SoftDrink(String name, double price, String category,
                         double volume, String composition, int quantity) {
+        Stock.numOfProducts++;
+        this.id = Stock.numOfProducts;
+
         this.name = name;
         this.price = price;
         this.category = category;
@@ -45,6 +49,11 @@ public class SoftDrink implements Product {
     @Override
     public int getRebuyQuantity() {
         return rebuyQuantity;
+    }
+
+    @Override
+    public int getId() {
+        return id;
     }
 
     @Override
